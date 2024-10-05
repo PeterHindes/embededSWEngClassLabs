@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;PHindesLab3/Inc/CompileFlags.h&apos;" deleteContents="false" description="Delete resource &apos;PHindesLab3/Inc/CompileFlags.h&apos;" element1="/PHindesLab3/Inc/CompileFlags.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1728106367763"/>
+</session>

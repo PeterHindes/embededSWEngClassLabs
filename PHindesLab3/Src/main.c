@@ -24,33 +24,40 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-volatile uint32_t flag = 0;
+//volatile uint32_t flag = 0;
 
-void EXTI0_IRQHandler(void) {
-	if (EXTI->PR & (1<<0)) {
-		// Clear the pending interrupt
+void EXTI0_IRQHandler() {
+	// disable further interrupts while processing
+	IRQ_disable(EXTI0_IRQ_NUMBER);
+	toggleGreenLED();
+//	flag=0xfcc0;
+//	syncButton();
+//	appDelay(DELAY_MAG);
+//	if (EXTI->PR & (1<<0)) {
+	// Clear the pending interrupt
+	IRQ_exti_line_clear(UBUT_PIN);
+	IRQ_clear(EXTI0_IRQ_NUMBER);
+//	}
+	IRQ_enable(EXTI0_IRQ_NUMBER);
 
-	}
-	flag = 500;
-	activateRedLED();
 }
 
 int main(void)
 {
-//	GPIO_PortToIndex(GPIOG);
 	applicationInit();
-	uint32_t eventsToRun = 0;
+	uint32_t eventsToRun;
     /* Loop forever */
 	for(;;) {
 		eventsToRun = getScheduledEvents();
 		if ((eventsToRun & LED_TOGGLE_EVENT) != 0) {
-			toggleRedLED();
+			toggleGreenLED();
+//			toggleRedLED();
 		}
 		if ((eventsToRun & DELAY_EVENT) != 0) {
 			appDelay(DELAY_MAG);
 		}
 		if ((eventsToRun & POLL_BTN_EVENT) != 0) {
-			pollButton();
+			syncButton();
 		}
 	}
 }

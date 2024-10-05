@@ -13,7 +13,7 @@
 #define BUTTON_PUSHED UBUT_ACTIVE_VAL
 #define BUTTON_UNPUSHED ~UBUT_ACTIVE_VAL
 
-void BUT_Init();
+void BUT_Init(bool useInterrupts);
 //void BUT_ClkEn();
 bool BUT_Pressed();
 

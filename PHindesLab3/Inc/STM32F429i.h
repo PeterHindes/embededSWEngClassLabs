@@ -19,7 +19,7 @@
 #define RCC_PERIF_BASE_ADDR (AHB1_BUSS_BASE_ADDR + 0x3800)
 #define GPIOG_PERIF_BASE_ADDR (AHB1_BUSS_BASE_ADDR + 0x1800)
 
-
+#define EN_SYSCFG_CLK (RCC->AHB2EN |= (1<<14))
 
 // Interrupts section
 #define NVIC_ISER0 ((volatile uint32_t (*)[8]) 0xE000E100)
@@ -120,6 +120,7 @@ typedef struct RCC_RegDef_t {
 #define RED_LED_PIN 14
 
 #define UBUT_PORT GPIOA
+#define UBUT_PORT_NUMBER 0
 #define UBUT_PIN 0
 #define UBUT_ACTIVE_VAL 1 // active high when pushed
 

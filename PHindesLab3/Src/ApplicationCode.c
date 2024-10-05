@@ -6,6 +6,7 @@
  */
 
 #include <ApplicationCode.h>
+#define USE_INTERRUPTS // Compiler flag to enable interrupts, comment out to disable
 
 void greenLEDInit(){
 	LED_Init(GREEN_LED);
@@ -15,14 +16,16 @@ void redLEDInit(){
 }
 
 void applicationInit(){
-	BUT_Init();
 	LED_Init(GREEN_LED);
 	LED_Init(RED_LED);
 
-	IRQ_Init();
-
-//	addSchedulerEvent(LED_TOGGLE_EVENT);
+#if defined(USE_INTERRUPTS)
+	BUT_Init(1);
+#else
+	BUT_Init(0);
 	addSchedulerEvent(POLL_BTN_EVENT);
+#endif
+//	addSchedulerEvent(LED_TOGGLE_EVENT);
 	addSchedulerEvent(DELAY_EVENT);
 }
 
@@ -45,7 +48,7 @@ void deactivateRedLED(){
 	TurnOffLED(RED_LED);
 }
 
-void pollButton(){
+void syncButton(){
 	bool pressed = BUT_Pressed();
 	pressed ? activateGreenLED() : deactivateGreenLED();
 }

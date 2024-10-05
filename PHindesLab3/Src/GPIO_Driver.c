@@ -46,7 +46,27 @@ void setOneBitReg(volatile uint32_t * reg, uint8_t subPos, uint32_t bits){
 }
 
 void GPIO_Init(GPIO_RegDef_t * port, GPIO_PinConfig_t config){
+	static bool calledBefore;
+	if (!calledBefore){
+		IRQ_Init();
+		calledBefore = 1;
+	}
+
 	setTwoBitReg(&(port->MODER), config.PinNumber, config.PinMode);
+
+	if (config.PinInteruptMode != NO_INTERRUPT && config.PinNumber <=15){
+		// Set triggers
+		bool falling = ((FALLING_EDGE_INTERRUPT == config.PinInteruptMode) | (FALLING_OR_RISING_EDGE_INTERRUPT == config.PinInteruptMode));
+		bool rising = ((RISING_EDGE_INTERRUPT == config.PinInteruptMode) | (FALLING_OR_RISING_EDGE_INTERRUPT == config.PinInteruptMode));
+		EXTI->RTSR |= (rising << config.PinNumber); // on if on
+		EXTI->RTSR &= (rising << config.PinNumber); // off if off
+		EXTI->FTSR |= (falling << config.PinNumber);
+		EXTI->FTSR &= (falling << config.PinNumber);
+
+		// Unmask this pin/line
+		EXTI->IMR |= (1 << config.PinMode);
+	}
+
 	setTwoBitReg(&(port->OSPEEDR), config.PinNumber, config.PinSpeed);
 	setTwoBitReg(&(port->PUPDR), config.PinNumber, config.PinPuPdControl);
 
@@ -84,13 +104,15 @@ uint8_t GPIO_PortToIndex(GPIO_RegDef_t * port) {
 }
 
 void GPIO_WriteToOutputPin(GPIO_RegDef_t * port, uint8_t pinNumber, uint8_t value) {
+	uint32_t mask = (1 << pinNumber);
+//	uint32_t nmask = ~mask;
 	if (value == 0){
-		(port->ODR) &= (!(1) << pinNumber);
+		(port->ODR) &= ~mask;
 	} else {
-		(port->ODR) |= (1 << pinNumber);
+		(port->ODR) |= mask;
 	}
 }
 
 void GPIO_ToggleOutputPin(GPIO_RegDef_t * port, uint8_t pinNumber) {
-	GPIO_WriteToOutputPin(port, pinNumber, ~GPIO_ReadFromInputPin(port, pinNumber));
+	GPIO_WriteToOutputPin(port, pinNumber, GPIO_ReadFromInputPin(port, pinNumber) == 0);
 }

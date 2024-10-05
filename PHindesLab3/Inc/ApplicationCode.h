@@ -11,9 +11,9 @@
 #define NAME_LEN 5
 #define DELAY_MAG 250000
 
-#include <Scheduler.h>
 #include <LED_Driver.h>
 #include <Button_Driver.h>
+#include <Scheduler.h>
 #include <InterruptControl.h>
 
 void applicationInit();
@@ -26,7 +26,7 @@ void activateRedLED();
 void deactivateGreenLED();
 void deactivateRedLED();
 
-void pollButton();
+void syncButton();
 
 void appDelay(uint32_t timeDelay);
 

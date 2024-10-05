@@ -7,4 +7,4 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab1\ Debug/activeLaunch
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab1\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab2\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab2/activeLaunchMode=debug
-org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab3\ Debug/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PHindesLab3\ Debug/activeLaunchMode=run

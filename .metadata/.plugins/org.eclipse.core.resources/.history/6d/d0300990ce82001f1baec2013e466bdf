@@ -1,0 +1,13 @@
+/*
+ * CompileFlags.h
+ *
+ *  Created on: Oct 4, 2024
+ *      Author: user
+ */
+
+#ifndef COMPILEFLAGS_H_
+#define COMPILEFLAGS_H_
+
+#define USE_INTERRUPTS
+
+#endif /* COMPILEFLAGS_H_ */

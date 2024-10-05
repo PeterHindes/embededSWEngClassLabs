@@ -18,12 +18,14 @@ void IRQ_EXTI_pin_picker(uint8_t ExtiNumber, uint8_t portNumber){
 }
 
 void IRQ_Init(){
-	RCC->AHB2EN |= (1<<14); // Enable Syscfg
+	EN_SYSCFG_CLK; // Enable Syscfg clock
+	// Dont need to enable exti through rcc
+
+	// Specific to the button use case
+	IRQ_EXTI_pin_picker(0,0); // set exti port
 	IRQ_enable(EXTI0_IRQ_NUMBER);
-	IRQ_EXTI_pin_picker(0,0);
 }
 
-// TODO Dont use or
 void IRQ_enable(uint8_t irqNum){
 	(* NVIC_ISER0)[irqNum/32] |= (1 << (irqNum%32));
 }
