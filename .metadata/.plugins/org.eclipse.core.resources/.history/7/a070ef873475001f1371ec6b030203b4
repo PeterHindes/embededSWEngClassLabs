@@ -1,0 +1,89 @@
+/*
+ * GPIO_Driver.c
+ *
+ *  Created on: Sep 12, 2024
+ *      Author: user
+ */
+
+#include <GPIO_Driver.h>
+
+#define GPIO_CONFIG_BITS 2
+
+void setTwoBitReg(uint8_t * reg, uint8_t subPos, uint8_t bits){
+	uint32_t temp;
+	temp = (bits << (GPIO_CONFIG_BITS * subPos));
+
+	// Clear the mode with two zeros in our pin related bits
+	(*reg) &= ~(0b11 << (GPIO_CONFIG_BITS * subPos));
+
+	// Set the mode from our args
+	(*reg) |= temp;
+}
+void setOneBitReg(uint8_t * reg, uint8_t subPos, uint8_t bits){
+	uint32_t temp;
+	temp = (bits << subPos);
+
+	// Clear the mode with two zeros in our pin related bits
+	(*reg) &= ~(0b1 << subPos);
+
+	// Set the mode from our args
+	(*reg) |= temp;
+}
+
+void GPIO_Init(GPIO_RegDef_t * port, GPIO_PinConfig_t config){
+//	{ // Set MODER
+//		uint32_t temp;
+//		temp = (config.PinMode << (GPIO_CONFIG_BITS * config.PinNumber));
+//
+//		// Clear the mode with two zeros in our pin related bits
+//		port->MODDER &= ~(0b11 << (GPIO_CONFIG_BITS * config.PinNumber));
+//
+//		// Set the mode from our args
+//		port->MODDER |= temp;
+//	}
+	setTwoBitReg(*(port->MODDER), config.PinNumber, config.PinMode);
+	setTwoBitReg(*(port->OSPEEDR), config.PinNumber, config.PinSpeed);
+	setTwoBitReg(*(port->PUPDR), config.PinNumber, config.PinPuPdControl);
+
+	setOneBitReg(*(port->OTYPER), config.PinNumber, config.OPType);
+
+}
+
+void GPIO_ClockControl(GPIO_RegDef_t * port, uint8_t enableDisable) {
+	// Safety for our limited implementation
+	if (port == GPIOG){
+		if (enableDisable == 1){
+			GPIOG_CLK_ENABLE ;
+		} else {
+			GPIOG_CLK_DISABLE ;
+		}
+	}
+}
+
+uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t * port, uint8_t pinNumber) {
+//	return ((port->IDR) << (15-pinNumber)) >> 15;
+	return ((port->IDR) & (1<<pinNumber)) >> pinNumber; // Technically uses one more operation
+}
+
+
+void GPIO_WriteToOutputPin(GPIO_RegDef_t * port, uint8_t pinNumber, uint8_t value) {
+	// Safety for our limited implementation
+	if (port == GPIOG) {
+		if (value == 0){
+			(port->ODR) &= (!(1) << pinNumber);
+		} else {
+			(port->ODR) |= (1 << pinNumber);
+		}
+	}
+}
+
+void GPIO_ToggleOutputPin(GPIO_RegDef_t * port, uint8_t pinNumber) {
+	// Safety for our limited implementation
+		if (port == GPIOG) {
+			if (GPIO_ReadFromInputPin(port, pinNumber) == 0) {
+				GPIO_WriteToOutputPin(port, pinNumber, 0);
+			} else {
+				GPIO_WriteToOutputPin(port, pinNumber, 1);
+			}
+		}
+}

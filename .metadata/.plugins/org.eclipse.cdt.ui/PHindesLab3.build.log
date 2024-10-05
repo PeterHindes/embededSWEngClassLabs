@@ -1,0 +1,23 @@
+20:14:39 **** Incremental Build of configuration Debug for project PHindesLab3 ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/ApplicationCode.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/ApplicationCode.d" -MT"Src/ApplicationCode.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/ApplicationCode.o"
+arm-none-eabi-gcc "../Src/Button_Driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/Button_Driver.d" -MT"Src/Button_Driver.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/Button_Driver.o"
+arm-none-eabi-gcc "../Src/GPIO_Driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/GPIO_Driver.d" -MT"Src/GPIO_Driver.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/GPIO_Driver.o"
+arm-none-eabi-gcc "../Src/InterruptControl.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/InterruptControl.d" -MT"Src/InterruptControl.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/InterruptControl.o"
+arm-none-eabi-gcc "../Src/LED_Driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/LED_Driver.d" -MT"Src/LED_Driver.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/LED_Driver.o"
+arm-none-eabi-gcc "../Src/STM32F429i.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/STM32F429i.d" -MT"Src/STM32F429i.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/STM32F429i.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F429I_DISC1 -DSTM32 -DSTM32F429ZITx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "PHindesLab3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\STM32CubeIDE\workspace_1.16.0\PHindesLab3\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PHindesLab3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: PHindesLab3.elf
+ 
+arm-none-eabi-size  PHindesLab3.elf 
+arm-none-eabi-objdump -h -S PHindesLab3.elf  > "PHindesLab3.list"
+   text	   data	    bss	    dec	    hex	filename
+   2392	      0	   1576	   3968	    f80	PHindesLab3.elf
+Finished building: default.size.stdout
+ 
+Finished building: PHindesLab3.list
+ 
+
+20:14:40 Build Finished. 0 errors, 0 warnings. (took 464ms)
+

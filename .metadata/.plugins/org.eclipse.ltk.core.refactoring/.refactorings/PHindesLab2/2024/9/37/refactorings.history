@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;PHindesLab2/Src/ApplicationCode.h&apos; to &apos;ApplicationCode.c&apos;" description="Rename resource &apos;ApplicationCode.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/ApplicationCode.h" name="ApplicationCode.c" stamp="1726166061993" updateReferences="true"/>
+</session>

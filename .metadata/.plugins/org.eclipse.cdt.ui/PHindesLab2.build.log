@@ -1,0 +1,9 @@
+17:55:11 **** Clean-only build of configuration Debug for project PHindesLab2 ****
+make -j16 clean 
+rm -rf ./Startup/startup_stm32f429zitx.d ./Startup/startup_stm32f429zitx.o
+rm -rf ./Src/ApplicationCode.cyclo ./Src/ApplicationCode.d ./Src/ApplicationCode.o ./Src/ApplicationCode.su ./Src/GPIO_Driver.cyclo ./Src/GPIO_Driver.d ./Src/GPIO_Driver.o ./Src/GPIO_Driver.su ./Src/LED_Driver.cyclo ./Src/LED_Driver.d ./Src/LED_Driver.o ./Src/LED_Driver.su ./Src/Scheduler.cyclo ./Src/Scheduler.d ./Src/Scheduler.o ./Src/Scheduler.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+rm -rf PHindesLab2.elf PHindesLab2.list PHindesLab2.map default.size.stdout
+ 
+
+17:55:11 Build Finished. 0 errors, 0 warnings. (took 168ms)
+

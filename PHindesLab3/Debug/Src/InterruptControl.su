@@ -1,0 +1,7 @@
+../Src/InterruptControl.c:11:6:IRQ_EXTI_pin_picker	24	static
+../Src/InterruptControl.c:20:6:IRQ_Init	8	static
+../Src/InterruptControl.c:27:6:IRQ_enable	16	static
+../Src/InterruptControl.c:30:6:IRQ_disable	16	static
+../Src/InterruptControl.c:33:6:IRQ_set	16	static
+../Src/InterruptControl.c:36:6:IRQ_clear	16	static
+../Src/InterruptControl.c:40:6:IRQ_exti_line_clear	16	static

@@ -1,0 +1,16 @@
+/*
+ * Button_Driver.c
+ *
+ *  Created on: Sep 26, 2024
+ *      Author: user
+ */
+
+
+#include <Button_Driver.h>
+
+void BUT_Init() {
+	// This might be redundant
+	GPIO_ClockControl(UBUT_PORT, ENABLE);
+	// Use the default values for our gpio (all zeros for our board so redundant)
+	GPIO_PinConfig_t temp = DEFAULT_PIN_CONFIG(0);
+}

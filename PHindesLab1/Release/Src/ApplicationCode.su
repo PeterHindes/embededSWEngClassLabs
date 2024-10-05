@@ -1,0 +1,5 @@
+../Src/ApplicationCode.c:21:6:AppDelay	0	static
+../Src/ApplicationCode.c:31:6:EnablePeripheralsAndClocks	0	static
+../Src/ApplicationCode.c:41:6:TurnOnRedLED	0	static
+../Src/ApplicationCode.c:47:6:TurnOffRedLED	0	static
+../Src/ApplicationCode.c:53:6:ToggleRedLED	0	static

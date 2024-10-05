@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;PHindesLab3/Src/Button_driver.c&apos; to &apos;Button_Driver.c&apos;" description="Rename resource &apos;Button_driver.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/Button_driver.c" name="Button_Driver.c" stamp="1727376920283" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;PHindesLab3/Src/STM32F429i.h&apos; to &apos;STM32F429i.c&apos;" description="Rename resource &apos;STM32F429i.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/STM32F429i.h" name="STM32F429i.c" stamp="1727564274649" updateReferences="true"/>
+</session>

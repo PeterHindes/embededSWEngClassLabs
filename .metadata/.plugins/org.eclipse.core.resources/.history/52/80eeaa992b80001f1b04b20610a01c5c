@@ -1,0 +1,18 @@
+/*
+ * InterruptControl.h
+ *
+ *  Created on: Sep 28, 2024
+ *      Author: user
+ */
+
+#ifndef INTERRUPTCONTROL_H_
+#define INTERRUPTCONTROL_H_
+
+#define EXTI0_IRQ_NUMBER 6
+
+void IRQ_enable(uint8_t irqNum);
+void IRQ_disable(uint8_t irqNum);
+void IRQ_set(uint8_t irqNum);
+void IRQ_clear(uint8_t irqNum);
+
+#endif /* INTERRUPTCONTROL_H_ */
