@@ -1,9 +1,0 @@
-../Src/GPIO_Driver.c:15:6:setFourBitReg	1
-../Src/GPIO_Driver.c:27:6:setTwoBitReg	1
-../Src/GPIO_Driver.c:37:6:setOneBitReg	1
-../Src/GPIO_Driver.c:48:6:GPIO_Init	5
-../Src/GPIO_Driver.c:80:6:GPIO_ClockControl	2
-../Src/GPIO_Driver.c:88:9:GPIO_ReadFromInputPin	3
-../Src/GPIO_Driver.c:98:9:GPIO_PortToIndex	1
-../Src/GPIO_Driver.c:106:6:GPIO_WriteToOutputPin	2
-../Src/GPIO_Driver.c:116:6:GPIO_ToggleOutputPin	1

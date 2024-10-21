@@ -1,0 +1,40 @@
+/*
+ * Timer_Driver.h
+ *
+ *  Created on: Oct 15, 2024
+ *      Author: user
+ */
+
+#ifndef TIMER_DRIVER_H_
+#define TIMER_DRIVER_H_
+
+#include <STM32F429i.h>
+
+void TimerInit(GPTIMR_RegDef_t * tim, GPTimer_Config_t config);
+void TimerEnableDisable(GPTIMR_RegDef_t * tim, bool enable);
+void TimerStart(GPTIMR_RegDef_t * tim);
+void TimerStop(GPTIMR_RegDef_t * tim);
+void TimerReset(GPTIMR_RegDef_t * tim);
+
+uint32_t TimerReadCurent(GPTIMR_RegDef_t * tim);
+
+
+void TimerInterruptEnableDisable(GPTIMR_RegDef_t * tim, bool enable);
+
+uint32_t TimerReadARR(GPTIMR_RegDef_t * tim);
+
+enum {
+	TIM_MODE_UPCOUNT,
+	TIM_MODE_DOWNCOUNT,
+	TIM_MODE_CENTERALUP,
+	TIM_MODE_CENTERALDOWN,
+	TIM_MODE_CENTERALBOTH,
+};
+
+typedef struct GPTImer_Config_t {
+	uint32_t Auto_Reload_Value;
+	uint8_t Master_Mode_Selection;
+	uint8_t Clock_Division_Selection
+} GPTImer_Config_t;
+
+#endif /* TIMER_DRIVER_H_ */

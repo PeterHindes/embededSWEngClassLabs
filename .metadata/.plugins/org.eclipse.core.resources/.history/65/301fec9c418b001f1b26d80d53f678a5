@@ -1,0 +1,43 @@
+/*
+ * Timer_Driver.c
+ *
+ *  Created on: Oct 15, 2024
+ *      Author: user
+ */
+
+#include <Timer_Driver.h>
+
+void TimerInit(GPTIMR_RegDef_t * tim, GPTimer_Config_t config){
+	uint16_t cr1 = 0x00;
+//	cr1 |= ((0b11 & config.Clock_Division_Selection) << CKD_BIT_OFFSET);
+	setBit(& cr1, config.Clock_Division_Selection & 0b1, CKD_BIT_OFFSET);
+	setBit(& cr1, (config.Clock_Division_Selection>>1) & 0b1, (CKD_BIT_OFFSET+1));
+//	cr1 |= ((0b1 & config.Auto_reload_buffer_enablement) << ARPE_BIT_OFFSET);
+	setBit(& cr1, config.Auto_reload_buffer_enablement, ARPE_BIT_OFFSET);
+//	cr1 |= ((0b11 & config.))
+
+	switch (config.Counting_Mode) {
+		case TIM_CMODE_UPCOUNT:
+			setBit(& cr1, 0, DIR_BIT_OFFSET);
+			setBit(& cr1, 0, CMS_BIT_OFFSET);
+			setBit(& cr1, 0, (CMS_BIT_OFFSET+1));
+			break;
+		case TIM_CMODE_DOWNCOUNT:
+			setBit(& cr1, 1, DIR_BIT_OFFSET);
+			setBit(& cr1, 0, CMS_BIT_OFFSET);
+			setBit(& cr1, 0, (CMS_BIT_OFFSET+1));
+			break;
+		case TIM_CMODE_CENTERALDOWN:
+			setBit(& cr1, 0, (CMS_BIT_OFFSET+1));
+			setBit(& cr1, 1, CMS_BIT_OFFSET);
+			break;
+		case TIM_CMODE_CENTERALUP:
+			setBit(& cr1, 1, (CMS_BIT_OFFSET+1));
+			setBit(& cr1, 0, CMS_BIT_OFFSET);
+			break;
+		case TIM_CMODE_CENTERALBOTH:
+			setBit(& cr1, 1, (CMS_BIT_OFFSET+1));
+			setBit(& cr1, 1, CMS_BIT_OFFSET);
+			break;
+	}
+}

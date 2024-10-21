@@ -1,0 +1,23 @@
+/*
+ * Timer_Driver.h
+ *
+ *  Created on: Oct 15, 2024
+ *      Author: user
+ */
+
+#ifndef TIMER_DRIVER_H_
+#define TIMER_DRIVER_H_
+
+#include <STM32F429i.h>
+
+void TimerInit(GPTIMR_RegDef_t * tim, GPTimer_Config_t config);
+void TimerEnableDisable(GPTIMR_RegDef_t * tim, bool enable);
+void TimerStart(GPTIMR_RegDef_t * tim);
+void TimerStop(GPTIMR_RegDef_t * tim);
+void TimerReset(GPTIMR_RegDef_t * tim);
+
+uint32_t TimerRead(GPTIMR_RegDef_t * tim);
+
+#endif /* TIMER_DRIVER_H_ */
+
+// TODO super
