@@ -20,10 +20,6 @@ void IRQ_EXTI_pin_picker(uint8_t ExtiNumber, uint8_t portNumber){
 void IRQ_Init(){
 	EN_SYSCFG_CLK; // Enable Syscfg clock
 	// Dont need to enable exti through rcc
-
-	// Specific to the button use case
-	IRQ_EXTI_pin_picker(0,0); // set exti port
-	IRQ_enable(EXTI0_IRQ_NUMBER);
 }
 
 void IRQ_enable(uint8_t irqNum){
@@ -41,4 +37,10 @@ void IRQ_clear(uint8_t irqNum){
 
 void IRQ_exti_line_clear(uint8_t lineNum) {
 	(EXTI->PR) |= (1 << lineNum);
+}
+void IRQ_tim_line_clear(uint8_t timNum){
+	if (timNum==2)
+		TIM2->SR &= ~1;
+	if (timNum==5)
+		TIM5->SR &= ~1;
 }

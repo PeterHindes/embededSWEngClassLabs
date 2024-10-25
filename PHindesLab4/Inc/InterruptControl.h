@@ -11,6 +11,8 @@
 #include <STM32F429i.h>
 
 #define EXTI0_IRQ_NUMBER 6
+#define TIM2_IRQ_NUMBER 28
+#define TIM5_IRQ_NUMBER 50
 
 /*
  * Bits 22:0 PRx: Pending bit
@@ -28,5 +30,6 @@ void IRQ_set(uint8_t irqNum);
 void IRQ_clear(uint8_t irqNum);
 
 void IRQ_exti_line_clear(uint8_t lineNum);
+void IRQ_tim_line_clear(uint8_t timNum);
 
 #endif /* INTERRUPTCONTROL_H_ */

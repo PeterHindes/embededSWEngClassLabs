@@ -49,12 +49,16 @@ void GPIO_Init(GPIO_RegDef_t * port, GPIO_PinConfig_t config){
 	static bool calledBefore;
 	if (!calledBefore){
 		IRQ_Init();
-		calledBefore = 1;
+		calledBefore = true;
 	}
 
 	setTwoBitReg(&(port->MODER), config.PinNumber, config.PinMode);
 
 	if (config.PinInteruptMode != NO_INTERRUPT && config.PinNumber <=15){
+		// Enable the IRQ
+		IRQ_EXTI_pin_picker(0,0); // set exti port
+		IRQ_enable(EXTI0_IRQ_NUMBER);
+
 		// Set triggers
 		bool falling = ((FALLING_EDGE_INTERRUPT == config.PinInteruptMode) | (FALLING_OR_RISING_EDGE_INTERRUPT == config.PinInteruptMode));
 		bool rising = ((RISING_EDGE_INTERRUPT == config.PinInteruptMode) | (FALLING_OR_RISING_EDGE_INTERRUPT == config.PinInteruptMode));

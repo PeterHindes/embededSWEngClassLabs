@@ -8,13 +8,11 @@
 #ifndef APPLICATIONCODE_H_
 #define APPLICATIONCODE_H_
 
-#define NAME_LEN 5
-#define DELAY_MAG 250000
+#define DAUL_TIMER_USAGE 0
 
 #include <LED_Driver.h>
 #include <Button_Driver.h>
 #include <Scheduler.h>
-#include <InterruptControl.h>
 
 void applicationInit();
 void greenLEDInit();

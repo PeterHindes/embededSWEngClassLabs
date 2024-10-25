@@ -13,6 +13,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define CLOCK_BASE_FREQ 16000000
+
 #define AHB1_BUSS_BASE_ADDR 0x40020000
 #define APB1_BUSS_BASE_ADDR 0x40000000
 #define GPIO_START_ADDR AHB1_BUSS_BASE_ADDR // the base addr of the first gpio perif
