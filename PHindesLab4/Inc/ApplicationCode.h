@@ -8,7 +8,7 @@
 #ifndef APPLICATIONCODE_H_
 #define APPLICATIONCODE_H_
 
-#define DAUL_TIMER_USAGE 0
+#define DAUL_TIMER_USAGE 1
 
 #include <LED_Driver.h>
 #include <Button_Driver.h>
