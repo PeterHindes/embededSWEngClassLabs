@@ -11,7 +11,6 @@
 static uint32_t scheduledEvents;
 
 void addSchedulerEvent(uint32_t event) {
-	// TODO could add code to check if the event is a single bit / a valid event but it would be slow
 	scheduledEvents |= event;
 }
 

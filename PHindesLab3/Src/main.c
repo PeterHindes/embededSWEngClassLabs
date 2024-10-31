@@ -16,7 +16,6 @@
  ******************************************************************************
  */
 
-#include <stdint.h>
 #include <ApplicationCode.h>
 #include <Scheduler.h>
 
