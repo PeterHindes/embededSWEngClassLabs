@@ -1,0 +1,4 @@
+../Core/Src/Gyro.c:11:6:SPI5_Init	8	static
+../Core/Src/Gyro.c:27:6:Gyro_Init	8	static
+../Core/Src/Gyro.c:38:6:Gyro_Power_On	16	static
+../Core/Src/Gyro.c:43:6:Gyro_Get_Id	16	static
