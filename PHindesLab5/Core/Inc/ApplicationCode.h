@@ -9,17 +9,9 @@
 #define APPLICATIONCODE_H_
 
 #include <Scheduler.h>
+#include <Gyro.h>
+#include <ButtonDriver.h>
 
 void applicationInit();
-void greenLEDInit();
-void redLEDInit();
-void toggleGreenLED();
-void toggleRedLED();
-void activateGreenLED();
-void activateRedLED();
-void deactivateGreenLED();
-void deactivateRedLED();
-
-void syncButton();
 
 #endif /* APPLICATIONCODE_H_ */

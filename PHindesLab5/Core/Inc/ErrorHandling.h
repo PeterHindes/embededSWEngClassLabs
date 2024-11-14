@@ -8,9 +8,7 @@
 #ifndef INC_ERRORHANDLING_H_
 #define INC_ERRORHANDLING_H_
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
+#include <types.h>
 #include <cmsis_gcc.h>
 
 void APPLICATION_ASSERT(bool pass);

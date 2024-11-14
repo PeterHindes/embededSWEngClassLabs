@@ -33,11 +33,32 @@ void SPI5_Init(void)
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GYRO_CS_PORT, &GPIO_InitStruct);
 }
-//static SPI_HandleTypeDef * ghspi5;
-//void Gyro_Import_Hspi5(SPI_HandleTypeDef * ihspi5){
-//	ghspi5 = ihspi5;
-//	APPLICATION_ASSERT(ghspi5 == ihspi5);
-//}
+void Gyro_Write(uint8_t addr, uint8_t data){
+	uint8_t  tx [2] = {(GYRO_WRITE_BIT | addr) , data};
+
+	Gyro_Enable_Slave_Comms();
+	HAL_StatusTypeDef status = HAL_SPI_Transmit(&smhspi5, (uint8_t*) &tx, 2, 1000);
+	Gyro_Disable_Slave_Comms();
+	Gyro_Await_Spi_Status(status);
+	Gyro_Verify_Spi_Status(status);
+
+	uint8_t returnedData = Gyro_Read(addr);
+	if (returnedData != data){
+		printf("\n\nFailure to Write, Sent: %X But Got: %X\n\n",data, returnedData);
+	}
+}
+uint8_t Gyro_Read(uint8_t addr){
+	uint8_t tx = (GYRO_READ_BIT | addr);
+
+	uint8_t RX_Buffer[2];
+	Gyro_Enable_Slave_Comms();
+	HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(&smhspi5, & tx, RX_Buffer, 2, HAL_MAX_DELAY);
+	Gyro_Disable_Slave_Comms();
+	Gyro_Await_Spi_Status(status);
+	Gyro_Verify_Spi_Status(status);
+
+	return RX_Buffer[1];
+}
 
 void Gyro_Init(){
 	SPI5_Init();
@@ -45,49 +66,38 @@ void Gyro_Init(){
 	HAL_Delay(500);
 
 	Gyro_Power_On();
+	Gyro_Enable_Fifo();
 
 	HAL_Delay(500);
 }
 void Gyro_Power_On(){
-	// Send GYRO_AWAKEN_MESSAGE
-//	uint8_t TX_Buffer [] = {GYRO_AWAKEN_MESSAGE, GYRO_AWAKEN_DATA}; // should be 0x820
-	uint16_t tx = 0xf20;
-	Gyro_Enable_Slave_Comms();
-	HAL_StatusTypeDef status = HAL_SPI_Transmit(&smhspi5, (uint8_t*) &tx, 2, 1000);
-	Gyro_Disable_Slave_Comms();
-	Gyro_Await_Spi_Status(status);
-	Gyro_Verify_Spi_Status(status);
+	// Set on bit and bandwith to 01 leaving the rest default
+	Gyro_Write(GYRO_CTRL_REG1, 0b00011000);
 }
 void Gyro_Enable_Fifo(){
-	uint16_t tx = 0xf20;
-	HAL_StatusTypeDef status = HAL_SPI_Transmit(&smhspi5, (uint8_t*) &tx, 2, 1000);
-	Gyro_Await_Spi_Status(status);
-	Gyro_Verify_Spi_Status(status);
+	uint8_t temp = Gyro_Read(0b0100100);
+	temp |= 0b01000000;
+	Gyro_Write(0b0100100, temp);
 }
 void Gyro_Get_Id(){
-	uint8_t TX_Buffer = GYRO_WHO_AM_I; // should be 0x8f
-	uint8_t RX_Buffer[2];
-	Gyro_Enable_Slave_Comms();
-	HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(&smhspi5, & TX_Buffer, RX_Buffer, 2, HAL_MAX_DELAY);
-	Gyro_Disable_Slave_Comms();
-	Gyro_Await_Spi_Status(status);
-	Gyro_Verify_Spi_Status(status);
-//	printf("Junk: %x\n", RX_Buffer[0]);
-	printf("ID: %X\n", RX_Buffer[1]);
+	printf("ID: %X\n", Gyro_Read(GYRO_WHO_AM_I));
+}
+int16_t convert_to_celsius(int8_t sensor_value) {
+    // celcius
+    const int16_t TEMP_MIN = -40;
+    const int16_t TEMP_MAX = 85;
+
+    const int16_t temp_range = TEMP_MAX-TEMP_MIN;
+    const int16_t sensor_range = 255;
+
+    int16_t temperature_celsius = TEMP_MAX - ((sensor_value + (sensor_range/2)) * temp_range) / sensor_range;
+
+    return temperature_celsius;
 }
 void Gyro_Get_Temp(){
-//	uint8_t TX_Buffer = GYRO_OUT_TEMP; // should be 0xa6
-	uint16_t tx = 0xa6;
-	uint8_t RX_Buffer;
-	Gyro_Enable_Slave_Comms();
-	HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(&smhspi5, (uint8_t*) &tx, &RX_Buffer, 2, HAL_MAX_DELAY);
-	Gyro_Disable_Slave_Comms();
-	Gyro_Await_Spi_Status(status);
-	Gyro_Verify_Spi_Status(status);
-	printf("Temp: %d\n", RX_Buffer);
+	int8_t temp = Gyro_Read(0b0100110);
+	printf("Temperature: %d deg C\n", convert_to_celsius(temp));
 }
-//void Gyro_Config_Reg();
-//void Gyro_Read_Reg();
 void Gyro_Verify_Spi_Status(HAL_StatusTypeDef status){
 	APPLICATION_ASSERT(status == HAL_OK);
 }

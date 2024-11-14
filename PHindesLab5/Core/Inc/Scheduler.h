@@ -8,12 +8,13 @@
 #ifndef SCHEDULER_H_
 #define SCHEDULER_H_
 
-#include <stdint.h>
+#include <types.h>
 
 // Bit mask to be used with the and operator to isolate the desired bit or with the or operator to set that bit
 #define LED_TOGGLE_EVENT (1 << 0)
 #define DELAY_EVENT (1 << 1)
 #define POLL_BTN_EVENT (1<<2)
+#define PRINT_TEMP_EVENT (1<<3)
 
 uint32_t getScheduledEvents();
 void addSchedulerEvent(uint32_t event);

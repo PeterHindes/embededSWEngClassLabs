@@ -8,8 +8,10 @@
 #ifndef BUTTON_DRIVER_H_
 #define BUTTON_DRIVER_H_
 
-void BUT_Init(bool useInterrupts);
+//#include <InterruptControl.h>
+#include "stm32f4xx_hal.h"
+#include <types.h>
 
-bool BUT_Pressed();
+void BUT_Init();
 
 #endif /* BUTTON_DRIVER_H_ */

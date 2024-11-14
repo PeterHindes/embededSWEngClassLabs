@@ -25,7 +25,8 @@ Core/Src/Gyro.o: ../Core/Src/Gyro.c ../Core/Inc/Gyro.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
- ../Core/Inc/ErrorHandling.h ../Drivers/CMSIS/Include/cmsis_gcc.h
+ ../Core/Inc/ErrorHandling.h ../Core/Inc/types.h \
+ ../Drivers/CMSIS/Include/cmsis_gcc.h
 ../Core/Inc/Gyro.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -54,4 +55,5 @@ Core/Src/Gyro.o: ../Core/Src/Gyro.c ../Core/Inc/Gyro.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Core/Inc/ErrorHandling.h:
+../Core/Inc/types.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:

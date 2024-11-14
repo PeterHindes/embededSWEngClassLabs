@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+#include <types.h>
 #include <ApplicationCode.h>
 #include <Scheduler.h>
 #include <Gyro.h>
@@ -47,7 +47,8 @@ extern void initialise_monitor_handles(void);
 SPI_HandleTypeDef hspi5;
 
 /* USER CODE BEGIN PV */
-
+void SystemClock_Config(void);
+#ifdef HAL_INITS
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,30 +56,17 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI5_Init(void);
 /* USER CODE BEGIN PFP */
-
+#endif
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t TX_BUFFER [] = {0b0001111, 0b00000000};
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	printf("INT");
-	if(GPIO_Pin == GPIO_PIN_0) {
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_SET);
-
-
-		printf("Transmiting");
-		uint8_t RX_BUFFER [1];
-		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
-		HAL_SPI_Transmit(&hspi5, TX_BUFFER, 2, 1000);
-		HAL_Delay(100);
-		HAL_SPI_Receive(&hspi5, RX_BUFFER, 1, 1000);
-//
-//		printf("%x", * RX_BUFFER);
-	} else {
-	  __NOP();
-	}
+	printf("\n");
+//	printf("INT\n");
+	addSchedulerEvent(DELAY_EVENT);
+	addSchedulerEvent(PRINT_TEMP_EVENT);
 }
 /* USER CODE END 0 */
 
@@ -106,26 +94,22 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+#ifdef HAL_INITS
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-//  MX_GPIO_Init();
-//  MX_SPI5_Init();
+  MX_GPIO_Init();
+  MX_SPI5_Init();
   /* USER CODE BEGIN 2 */
+#endif
+//	addSchedulerEvent(DELAY_EVENT);
+//	addSchedulerEvent(PRINT_TEMP_EVENT);
 	applicationInit();
-	uint32_t eventsToRun;
-	printf("\nInitializing gyro\n");
-	Gyro_Init();
-	printf("Done\n");
-	printf("Getting ID\n");
-	Gyro_Get_Id(); // should print 11010011
-	printf("Getting Temp\n");
-	Gyro_Get_Temp();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	uint32_t eventsToRun = 0;
 	while (1)
 	{
 		eventsToRun = getScheduledEvents();
@@ -133,16 +117,22 @@ int main(void)
 			// TODO
 		}
 		if ((eventsToRun & DELAY_EVENT) != 0) {
-			// TODO
+			HAL_Delay(50);
+			removeSchedulerEvent(DELAY_EVENT);
 		}
 		if ((eventsToRun & POLL_BTN_EVENT) != 0) {
 			// TODO
+		}
+		if ((eventsToRun & PRINT_TEMP_EVENT) != 0) {
+			Gyro_Get_Id();
+			Gyro_Get_Temp();
+			removeSchedulerEvent(PRINT_TEMP_EVENT);
 		}
 	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  /* USER CODE END 3 */
+	/* USER CODE END 3 */
 }
 
 /**
@@ -186,6 +176,7 @@ void SystemClock_Config(void)
   }
 }
 
+#ifdef HAL_INITS
 /**
   * @brief SPI5 Initialization Function
   * @param None
@@ -488,7 +479,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+#endif
 /* USER CODE END 4 */
 
 /**
