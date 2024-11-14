@@ -8,7 +8,10 @@
 #include <ErrorHandling.h>
 
 void APPLICATION_ASSERT(bool pass){
-	__disable_irq();
+	if(!pass) {
+		printf("\n\nAsert Failed!!!!\n");
+		__disable_irq();
+	}
 	while (!pass){
 		continue;
 	}

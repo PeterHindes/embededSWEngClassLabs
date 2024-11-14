@@ -1,4 +1,10 @@
-../Core/Src/Gyro.c:11:6:SPI5_Init	8	static
-../Core/Src/Gyro.c:27:6:Gyro_Init	8	static
-../Core/Src/Gyro.c:38:6:Gyro_Power_On	16	static
-../Core/Src/Gyro.c:43:6:Gyro_Get_Id	16	static
+../Core/Src/Gyro.c:10:6:SPI5_Init	40	static
+../Core/Src/Gyro.c:42:6:Gyro_Init	8	static
+../Core/Src/Gyro.c:51:6:Gyro_Power_On	16	static
+../Core/Src/Gyro.c:61:6:Gyro_Enable_Fifo	16	static
+../Core/Src/Gyro.c:67:6:Gyro_Get_Id	24	static
+../Core/Src/Gyro.c:78:6:Gyro_Get_Temp	24	static
+../Core/Src/Gyro.c:91:6:Gyro_Verify_Spi_Status	16	static
+../Core/Src/Gyro.c:94:6:Gyro_Await_Spi_Status	16	static
+../Core/Src/Gyro.c:100:6:Gyro_Enable_Slave_Comms	8	static
+../Core/Src/Gyro.c:107:6:Gyro_Disable_Slave_Comms	8	static

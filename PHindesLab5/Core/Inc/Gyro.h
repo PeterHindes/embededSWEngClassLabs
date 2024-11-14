@@ -18,11 +18,11 @@
 
 // awakens and sets odr to 800hz
 #define GYRO_AWAKEN_MESSAGE 0b00100000
-#define GYRO_AWAKEN_DATA 0b11111111
+#define GYRO_AWAKEN_DATA 0b00011111
 
 #define GYRO_SPI_NUM 5 // SPI5
-#define GYRO_CS_PIN_NUM 1
-#define GYRO_CS_PORT 2 // PORT C
+#define GYRO_CS_PIN_NUM GPIO_PIN_1
+#define GYRO_CS_PORT GPIOC
 
 
 void Gyro_Init();
@@ -31,8 +31,10 @@ void Gyro_Power_On();
 void Gyro_Get_Temp();
 void Gyro_Config_Reg();
 void Gyro_Read_Reg();
-void Gyro_Verify_Spi_Status();
+void Gyro_Verify_Spi_Status(HAL_StatusTypeDef status);
+void Gyro_Await_Spi_Status(HAL_StatusTypeDef status);
 void Gyro_Enable_Slave_Comms();
 void Gyro_Disable_Slave_Comms();
+void Gyro_Import_Hspi5(SPI_HandleTypeDef * ihspi5);
 
 #endif /* INC_GYRO_H_ */

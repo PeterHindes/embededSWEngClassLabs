@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <ApplicationCode.h>
 #include <Scheduler.h>
+#include <Gyro.h>
 extern void initialise_monitor_handles(void);
 /* USER CODE END Includes */
 
@@ -109,12 +110,18 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	MX_SPI5_Init();
+//  MX_GPIO_Init();
+//  MX_SPI5_Init();
   /* USER CODE BEGIN 2 */
 	applicationInit();
 	uint32_t eventsToRun;
-//	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
+	printf("\nInitializing gyro\n");
+	Gyro_Init();
+	printf("Done\n");
+	printf("Getting ID\n");
+	Gyro_Get_Id(); // should print 11010011
+	printf("Getting Temp\n");
+	Gyro_Get_Temp();
   /* USER CODE END 2 */
 
   /* Infinite loop */

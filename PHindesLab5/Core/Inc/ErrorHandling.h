@@ -10,6 +10,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <cmsis_gcc.h>
 
 void APPLICATION_ASSERT(bool pass);

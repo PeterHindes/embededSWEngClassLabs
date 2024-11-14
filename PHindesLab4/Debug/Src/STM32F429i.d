@@ -1,2 +1,0 @@
-Src/STM32F429i.o: ../Src/STM32F429i.c ../Inc/STM32F429i.h
-../Inc/STM32F429i.h:

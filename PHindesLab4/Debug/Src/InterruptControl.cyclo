@@ -1,8 +1,0 @@
-../Src/InterruptControl.c:11:6:IRQ_EXTI_pin_picker	1
-../Src/InterruptControl.c:20:6:IRQ_Init	1
-../Src/InterruptControl.c:25:6:IRQ_enable	1
-../Src/InterruptControl.c:28:6:IRQ_disable	1
-../Src/InterruptControl.c:31:6:IRQ_set	1
-../Src/InterruptControl.c:34:6:IRQ_clear	1
-../Src/InterruptControl.c:38:6:IRQ_exti_line_clear	1
-../Src/InterruptControl.c:41:6:IRQ_tim_line_clear	3
